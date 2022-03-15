@@ -39,11 +39,20 @@ try:
             df = df.sort_values(by=['des_not_disc'], ascending = False)
             return df['(Child) ASIN'][-result_count:].to_string(index=False)
     
+    download_file_1 = calculation.discoverable_but_not_desirable_items(df, limit, result_number)    
+    download_file_2 = calculation.desirable_but_not_discoverable_items(df, limit, result_number)    
+    @st.cache
+    def convert_df(df):
+        return df.to_csv().encode('utf-8')
     st.text('Discoverable but not desirable items')
     st.text(calculation.discoverable_but_not_desirable_items(df, limit, result_number))
-    st.download_button('Download CSV', calculation.discoverable_but_not_desirable_items(df, limit, result_number).to_csv(), 'text/csv')
+    
+    csv1 = convert_df(download_file_1)
+    st.download_button("Press to Download", csv1, "file.csv", "text/csv", key='download-csv')
+    csv2 = convert_df(dowload_file_2)
     st.text('Desirable but not discoverable items')
     st.text(calculation.desirable_but_not_discoverable_items(df, limit, result_number))
-    st.download_button('Download CSV', calculation.desirable_but_not_discoverable_items(df, limit, result_number), 'text/csv')
+    st.download_button("Press to Download", csv2, "file.csv", "text/csv", key='download-csv')
+    
 except:
     st.text('NO DATA NO BUSINESS  :))')
