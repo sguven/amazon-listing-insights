@@ -41,7 +41,7 @@ try:
     
     st.text('Discoverable but not desirable items')
     st.text(calculation.discoverable_but_not_desirable_items(df, limit, result_number))
-    st.download_button('Download CSV', calculation.discoverable_but_not_desirable_items(df, limit, result_number), 'text/csv')
+    st.download_button('Download CSV', calculation.discoverable_but_not_desirable_items(df, limit, result_number).to_csv(), 'text/csv')
     st.text('Desirable but not discoverable items')
     st.text(calculation.desirable_but_not_discoverable_items(df, limit, result_number))
     st.download_button('Download CSV', calculation.desirable_but_not_discoverable_items(df, limit, result_number), 'text/csv')
