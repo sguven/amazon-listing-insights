@@ -1,4 +1,6 @@
 import streamlit as st
+import pandas as pd
+import numpy as np
 
 st.text('Welcome')
 st.text('Please upload your Amazon data')
@@ -7,8 +9,7 @@ uploaded_file = st.sidebar.file_uploader(label = 'upload your file', type = ['cs
 limit = st.slider('View Limit', 0, 1000000)
 
 class calculation:
-    import pandas as pd
-    import numpy as np
+
     def csv_correction(uploded_file):
         df = pd.read_csv(uploaded_file)
         df['Sessions'] = df['Sessions'].replace("," , "", regex=True)
