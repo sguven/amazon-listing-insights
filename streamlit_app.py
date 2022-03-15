@@ -6,7 +6,7 @@ st.text('Welcome')
 st.text('Please upload your Amazon data')
 st.sidebar.subheader("yan kol")
 uploaded_file = st.sidebar.file_uploader(label = 'upload your file', type = ['csv', 'xlsx'])
-limit = int(st.number_input(min_value=1, value=10, step=1))
+limit = int(st.number_input('limit_number', min_value=1, value=10, step=1))
 df = pd.read_csv(uploaded_file)
 
 class calculation:
