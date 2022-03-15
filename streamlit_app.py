@@ -10,9 +10,9 @@ try:
     uploaded_file = st.file_uploader(label = 'Upload Your File', type = ['csv', 'xlsx'])
     df = pd.read_csv(uploaded_file)    
     limit = int(st.number_input('minimum limit for views', min_value=1, value=10, step=1))
-
+    result_number = int(st.slider('Product_number', 1, 100)
+        
     class calculation:
-        result_number = int(st.slider('Product_number', 1, 100)
         def csv_correction(df):
             #df = pd.read_csv(uploaded_file)
             df['Sessions'] = df['Sessions'].replace("," , "", regex=True)
@@ -28,21 +28,21 @@ try:
             df.replace([np.inf, -np.inf], np.nan, inplace=True)       
             df = df.dropna()
             return df        
-        def desirable_but_not_discoverable_items(uploaded_file, sessions_limit):
+        def desirable_but_not_discoverable_items(uploaded_file, sessions_limit, result_count):
             df = calculation.csv_calculation(uploaded_file)
             df = df[df.Sessions > sessions_limit]
             df = df.sort_values(by=['des_not_disc'], ascending = False)
-            return df['(Child) ASIN'][:result_number]
-        def discoverable_but_not_desirable_items(uploaded_file, sessions_limit):
+            return df['(Child) ASIN'][:result_count]
+        def discoverable_but_not_desirable_items(uploaded_file, sessions_limit, result_count):
             df = calculation.csv_calculation(uploaded_file)
             df = df[df.Sessions > sessions_limit]
             df = df.sort_values(by=['des_not_disc'], ascending = False)
-            return df['(Child) ASIN'][-result_number:]
+            return df['(Child) ASIN'][-result_count:]
     
     st.text('Discoverable but not desirable items')
-    st.text(calculation.discoverable_but_not_desirable_items(df, limit))
+    st.text(calculation.discoverable_but_not_desirable_items(df, limit, result_number))
     
     st.text('Desirable but not discoverable items')
-    st.text(calculation.desirable_but_not_discoverable_items(df, limit))
+    st.text(calculation.desirable_but_not_discoverable_items(df, limit, result_number))
 except:
     st.text('NO DATA NO BUSINESS  :))')
