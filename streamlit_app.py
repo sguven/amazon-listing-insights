@@ -4,16 +4,14 @@ import numpy as np
 
 st.text('Welcome')
 st.text('Please upload your Amazon data')
-st.sidebar.subheader("yan kol")
+#st.sidebar.subheader("yan kol")
 
 try:
     uploaded_file = st.file_uploader(label = 'Upload Your File', type = ['csv', 'xlsx'])
-    df = pd.read_csv(uploaded_file)
-    
+    df = pd.read_csv(uploaded_file)    
     limit = int(st.number_input('minimum limit for views', min_value=1, value=10, step=1))
-    
+    result_number = int(st.slider('Product_number', 1, 100)
     class calculation:
-    
         def csv_correction(df):
             #df = pd.read_csv(uploaded_file)
             df['Sessions'] = df['Sessions'].replace("," , "", regex=True)
@@ -33,12 +31,12 @@ try:
             df = calculation.csv_calculation(uploaded_file)
             df = df[df.Sessions > sessions_limit]
             df = df.sort_values(by=['des_not_disc'], ascending = False)
-            return df['(Child) ASIN'][:5]
+            return df['(Child) ASIN'][:result_number]
         def discoverable_but_not_desirable_items(uploaded_file, sessions_limit):
             df = calculation.csv_calculation(uploaded_file)
             df = df[df.Sessions > sessions_limit]
             df = df.sort_values(by=['des_not_disc'], ascending = False)
-            return df['(Child) ASIN'][-5:]
+            return df['(Child) ASIN'][-result_number:]
     
     st.text('Discoverable but not desirable items')
     st.text(calculation.discoverable_but_not_desirable_items(df, limit))
@@ -46,4 +44,4 @@ try:
     st.text('Desirable but not discoverable items')
     st.text(calculation.desirable_but_not_discoverable_items(df, limit))
 except:
-    pass
+    st.text('NO DATA NO BUSINESS  :))')
