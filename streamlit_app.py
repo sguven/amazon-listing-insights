@@ -16,7 +16,7 @@ class calculation:
         df['Sessions'] = pd.to_numeric(df['Sessions'], errors='coerce')
         df['Total Order Items'] = pd.to_numeric(df['Total Order Items'], errors='coerce')
         df['Page Views'] = pd.to_numeric(df['Page Views'], errors='coerce')
-        df['des_not_disc'] = (((df['Total Order Items'] / df['Sessions']) / df['Page Views']) * 1000)
+        df['des_not_disc'] = (((df['Total Order Items'] / df['Sessions']) / df['Page Views']) * 100000)
         df['disc_not_des'] = (1 / df['des_not_disc'])
         df.replace([np.inf, -np.inf], np.nan, inplace=True)
         df = df.dropna()
