@@ -19,18 +19,18 @@ class calculation:
         df['Page Views'] = pd.to_numeric(df['Page Views'], errors='coerce')
         return df    
     def csv_calculation(uploaded_file):
-        df = csv_correction(uploaded_file)
+        df = calculation.csv_correction(uploaded_file)
         df['des_not_disc'] = ((df['Total Order Items'] / df['Sessions']) / df['Page Views'])
         df.replace([np.inf, -np.inf], np.nan, inplace=True)       
         df = df.dropna()
         return df        
     def desirable_but_not_discoverable_items(uploaded_file, sessions_limit):
-        df = csv_calculation(uploaded_file)
+        df = calculation.csv_calculation(uploaded_file)
         df = df[df.Sessions > sessions_limit]
         df = df.sort_values(by=['des_not_disc'], ascending = True)[:5]
         return df['(Child) ASIN'][:5]
     def discoverable_but_not_desirable_items(uploaded_file, sessions_limit):
-        df = csv_calculation(uploaded_file)
+        df = calculation.csv_calculation(uploaded_file)
         df = df[df.Sessions > sessions_limit]
         df = df.sort_values(by=['des_not_disc'], ascending = True)[:5]
         return df['(Child) ASIN'][5:]
