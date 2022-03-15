@@ -40,5 +40,5 @@ class calculation:
 st.text('Discoverable but not desirable items')
 st.text(calculation.discoverable_but_not_desirable_items(df, limit))
 
-st.text('desirable but not discoverable items')
+st.text('Desirable but not discoverable items')
 st.text(calculation.desirable_but_not_discoverable_items(df, limit))
