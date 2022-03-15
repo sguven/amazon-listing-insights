@@ -37,7 +37,7 @@ class calculation:
         return df['(Child) ASIN'][-5:]
 
 st.text('Discoverable but not desirable items')
-limit1 = int(st.number_input('minimum limit for views', min_value=1, value=10, step=1))
+limit1 = 0
 st.text(calculation.discoverable_but_not_desirable_items(df, limit1))
 
 st.text('Desirable but not discoverable items')
