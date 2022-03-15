@@ -29,12 +29,12 @@ class calculation:
     def desirable_but_not_discoverable_items(uploaded_file, sessions_limit):
         df = calculation.csv_calculation(uploaded_file)
         df = df[df.Sessions > sessions_limit]
-        df = df.sort_values(by=['des_not_disc'], ascending = True)[:5]
+        df = df.sort_values(by=['des_not_disc'], ascending = True)
         return df['(Child) ASIN'][:5]
     def discoverable_but_not_desirable_items(uploaded_file, sessions_limit):
         df = calculation.csv_calculation(uploaded_file)
         df = df[df.Sessions > sessions_limit]
-        df = df.sort_values(by=['des_not_disc'], ascending = True)[:5]
+        df = df.sort_values(by=['des_not_disc'], ascending = True)
         return df['(Child) ASIN'][-5:]
 
 st.text('Discoverable but not desirable items')
