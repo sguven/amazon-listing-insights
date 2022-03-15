@@ -5,7 +5,7 @@ import numpy as np
 st.text('Welcome')
 st.text('Please upload your Amazon data')
 st.sidebar.subheader("yan kol")
-uploaded_file = st.sidebar.file_uploader(label = 'upload your file', type = ['csv', 'xlsx'])
+uploaded_file = st.file_uploader(label = 'upload your file', type = ['csv', 'xlsx'])
 df = pd.read_csv(uploaded_file)
 limit = int(st.number_input('minimum limit for views', min_value=1, value=10, step=1))
 
