@@ -41,8 +41,8 @@ try:
     
     download_file_1 = calculation.discoverable_but_not_desirable_items(df, limit, result_number)    
     download_file_2 = calculation.desirable_but_not_discoverable_items(df, limit, result_number)    
-    download_file_1 = download_file_1.to_csv().encode('utf-8')
-    download_file_2 = download_file_2.to_csv().encode('utf-8')
+    download_file_1 = download_file_1.to_csv()
+    download_file_2 = download_file_2.to_csv()
     
     st.text('Discoverable but not desirable items')
     st.text(calculation.discoverable_but_not_desirable_items(df, limit, result_number))    
