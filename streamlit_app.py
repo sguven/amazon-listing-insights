@@ -6,7 +6,6 @@ st.text('Welcome')
 st.text('Please upload your Amazon data')
 st.sidebar.subheader("yan kol")
 uploaded_file = st.sidebar.file_uploader(label = 'upload your file', type = ['csv', 'xlsx'])
-limit = int(st.number_input('limit_number', min_value=1, value=10, step=1))
 df = pd.read_csv(uploaded_file)
 
 class calculation:
@@ -38,7 +37,9 @@ class calculation:
         return df['(Child) ASIN'][-5:]
 
 st.text('Discoverable but not desirable items')
-st.text(calculation.discoverable_but_not_desirable_items(df, limit))
+limit1 = int(st.number_input('minimum limit for views', min_value=1, value=10, step=1))
+st.text(calculation.discoverable_but_not_desirable_items(df, limit1))
 
 st.text('Desirable but not discoverable items')
-st.text(calculation.desirable_but_not_discoverable_items(df, limit))
+limit2 = int(st.number_input('minimum limit for views', min_value=1, value=10, step=1))
+st.text(calculation.desirable_but_not_discoverable_items(df, limit2))
