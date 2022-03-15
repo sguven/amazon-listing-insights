@@ -44,7 +44,6 @@ try:
     st.download_button('Download CSV', calculation.discoverable_but_not_desirable_items(df, limit, result_number), 'text/csv')
     st.text('Desirable but not discoverable items')
     st.text(calculation.desirable_but_not_discoverable_items(df, limit, result_number))
-    st.download_button('Download CSV', st.text(calculation.desirable_but_not_discoverable_items(df, limit, result_number), 'text/csv')
-    
+    st.download_button('Download CSV', calculation.desirable_but_not_discoverable_items(df, limit, result_number), 'text/csv')
 except:
     st.text('NO DATA NO BUSINESS  :))')
