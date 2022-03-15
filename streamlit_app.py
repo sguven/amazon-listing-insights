@@ -4,14 +4,12 @@ st.text('Welcome')
 st.text('Please upload your Amazon data')
 st.sidebar.subheader("yan kol")
 uploaded_file = st.sidebar.file_uploader(label = 'upload your file', type = ['csv', 'xlsx'])
+limit = st.slider('View Limit', 0, 1000000)
 
-
-class calculation:      
-    def csv_calculation(uploaded_file):
-        import pandas as pd
-        import numpy as np
-        sessions_limit = 10
-        impression_limit = 100
+class calculation:
+    import pandas as pd
+    import numpy as np
+    def csv_correction(uploded_file):
         df = pd.read_csv(uploaded_file)
         df['Sessions'] = df['Sessions'].replace("," , "", regex=True)
         df['Total Order Items'] = df['Total Order Items'].replace("," , "", regex=True)
@@ -19,15 +17,26 @@ class calculation:
         df['Sessions'] = pd.to_numeric(df['Sessions'], errors='coerce')
         df['Total Order Items'] = pd.to_numeric(df['Total Order Items'], errors='coerce')
         df['Page Views'] = pd.to_numeric(df['Page Views'], errors='coerce')
-        df['des_not_disc'] = (((df['Total Order Items'] / df['Sessions']) / df['Page Views']) * 100000)
-        df['disc_not_des'] = (1 / df['des_not_disc'])
-        df.replace([np.inf, -np.inf], np.nan, inplace=True)
+        return df    
+    def csv_calculation(uploaded_file):
+        df = csv_correction(uploded_file)
+        df['des_not_disc'] = ((df['Total Order Items'] / df['Sessions']) / df['Page Views'])
+        df.replace([np.inf, -np.inf], np.nan, inplace=True)       
         df = df.dropna()
+        return df        
+    def desirable_but_not_discoverable_items(uploaded_file, sessions_limit):
+        df = csv_calculation(uploaded_file)
         df = df[df.Sessions > sessions_limit]
         df = df.sort_values(by=['des_not_disc'], ascending = True)[:5]
         return df['(Child) ASIN'][:5]
-        #return df
+    def discoverable_but_not_desirable_items(uploaded_file, sessions_limit):
+        df = csv_calculation(uploaded_file)
+        df = df[df.Sessions > sessions_limit]
+        df = df.sort_values(by=['des_not_disc'], ascending = True)[:5]
+        return df['(Child) ASIN'][5:]
 
-st.text('asagidaki ASIN''ler bayagi problemli, gorunuyorlar ama satilmiyorlar')
-st.text(calculation.csv_calculation(uploaded_file))
+st.text('Discoverable but not desirable items')
+st.text(calculation.discoverable_but_not_desirable_items(uploaded_file, limit))
 
+st.text('desirable but not discoverable items')
+st.text(calculation.desirable_but_not_discoverable_items(uploaded_file, limit))
