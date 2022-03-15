@@ -35,7 +35,7 @@ class calculation:
         df = calculation.csv_calculation(uploaded_file)
         df = df[df.Sessions > sessions_limit]
         df = df.sort_values(by=['des_not_disc'], ascending = True)[:5]
-        return df['(Child) ASIN'][5:]
+        return df['(Child) ASIN'][-5:]
 
 st.text('Discoverable but not desirable items')
 st.text(calculation.discoverable_but_not_desirable_items(df, limit))
