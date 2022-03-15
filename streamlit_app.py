@@ -23,9 +23,4 @@ class calculation:
         return df.sort_values(by=['des_not_disc'], ascending = False)
 
 st.text(calculation.csv_calculation(uploaded_file))
-    '''
-try :
-    st.text(calculation.csv_calculation(uploaded_file))
-except:
-    st.text("no data")
-    '''
+
