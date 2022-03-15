@@ -7,11 +7,12 @@ st.text('Please upload your Amazon data')
 st.sidebar.subheader("yan kol")
 uploaded_file = st.sidebar.file_uploader(label = 'upload your file', type = ['csv', 'xlsx'])
 limit = st.slider('View Limit', 0, 1000000)
+df = pd.read_csv(uploaded_file)
 
 class calculation:
 
-    def csv_correction(uploded_file):
-        df = pd.read_csv(uploaded_file)
+    def csv_correction(df):
+        #df = pd.read_csv(uploaded_file)
         df['Sessions'] = df['Sessions'].replace("," , "", regex=True)
         df['Total Order Items'] = df['Total Order Items'].replace("," , "", regex=True)
         df['Page Views'] = df['Page Views'].replace("," , "", regex=True)                  
