@@ -4,13 +4,14 @@ st.text('Welcome')
 st.text('Please upload your Amazon data')
 st.sidebar.subheader("yan kol")
 uploaded_file = st.sidebar.file_uploader(label = 'upload your file', type = ['csv', 'xlsx'])
-import pandas as pd
-import numpy as np
+
 
 class calculation:      
-    sessions_limit = 10
-    impression_limit = 100
     def csv_calculation(uploaded_file):
+        import pandas as pd
+        import numpy as np
+        sessions_limit = 10
+        impression_limit = 100
         df = pd.read_csv(uploaded_file)
         df['Sessions'] = pd.to_numeric(df['Sessions'], errors='coerce')
         df['Total Order Items'] = pd.to_numeric(df['Total Order Items'], errors='coerce')
