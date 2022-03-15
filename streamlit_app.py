@@ -10,7 +10,7 @@ try:
     uploaded_file = st.file_uploader(label = 'Upload Your File', type = ['csv', 'xlsx'])
     df = pd.read_csv(uploaded_file)    
     limit = int(st.number_input('minimum limit for views', min_value=1, value=10, step=1))
-    result_number = int(st.slider('Product_number', 1, 100)
+    result_number = int(st.slider('Product_number', 1, 100))
         
     class calculation:
         def csv_correction(df):
