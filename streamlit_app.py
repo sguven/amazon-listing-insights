@@ -21,7 +21,8 @@ class calculation:
         df.replace([np.inf, -np.inf], np.nan, inplace=True)
         df = df.dropna()
         df = df[df.Sessions > sessions_limit]
-        return df.sort_values(by=['des_not_disc'], ascending = False)
+        df = df.sort_values(by=['des_not_disc'], ascending = False)[:5]
+        return df['(Child) ASIN'][:5]
 
 st.text(calculation.csv_calculation(uploaded_file))
 
