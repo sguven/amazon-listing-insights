@@ -19,7 +19,7 @@ class calculation:
         df['Page Views'] = pd.to_numeric(df['Page Views'], errors='coerce')
         return df    
     def csv_calculation(uploaded_file):
-        df = csv_correction(uploded_file)
+        df = csv_correction(uploaded_file)
         df['des_not_disc'] = ((df['Total Order Items'] / df['Sessions']) / df['Page Views'])
         df.replace([np.inf, -np.inf], np.nan, inplace=True)       
         df = df.dropna()
