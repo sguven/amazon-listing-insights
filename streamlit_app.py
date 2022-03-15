@@ -1,7 +1,7 @@
 import streamlit as st
 
 st.text('Welcome')
-st.text('Please enter the features of the vehicle you want to calculate the price of.')
+st.text('Please upload your Amazon data')
 st.sidebar.subheader("yan kol")
 uploaded_file = st.sidebar.file_uploader(label = 'upload your file', type = ['csv', 'xlsx'])
 
@@ -19,5 +19,8 @@ df.replace([np.inf, -np.inf], np.nan, inplace=True)
 df = df.dropna()
 df = df[df.Sessions > sessions_limit]
 df = df.sort_values(by=['des_not_disc'], ascending = False)
-st.text(df[:5])
+try :
+    st.text(df[:5])
+except:
+    st.text("no data")
     
