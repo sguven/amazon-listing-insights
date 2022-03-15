@@ -22,8 +22,8 @@ class calculation:
         df = df.dropna()
         df = df[df.Sessions > sessions_limit]
         df = df.sort_values(by=['des_not_disc'], ascending = True)[:5]
-        #return df['(Child) ASIN'][:5]
-        return df
+        return df['(Child) ASIN'][:5]
+        #return df
 
 st.text('asagidaki ASIN''ler bayagi problemli, gorunuyorlar ama satilmiyorlar')
 st.text(calculation.csv_calculation(uploaded_file))
