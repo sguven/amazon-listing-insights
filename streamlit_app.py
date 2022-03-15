@@ -32,7 +32,7 @@ try:
             df = calculation.csv_calculation(uploaded_file)
             df = df[df.Sessions > sessions_limit]
             df = df.sort_values(by=['des_not_disc'], ascending = False)
-            return df['(Child) ASIN'][:result_count]
+            return df['(Child) ASIN'][:result_count].to_string(index=False)
         def discoverable_but_not_desirable_items(uploaded_file, sessions_limit, result_count):
             df = calculation.csv_calculation(uploaded_file)
             df = df[df.Sessions > sessions_limit]
