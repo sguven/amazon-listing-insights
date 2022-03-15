@@ -38,18 +38,12 @@ try:
             df = df[df.Sessions > sessions_limit]
             df = df.sort_values(by=['des_not_disc'], ascending = False)
             return df['(Child) ASIN'][-result_count:].to_string(index=False)
-    
-    download_file_1 = calculation.discoverable_but_not_desirable_items(df, limit, result_number)    
-    download_file_2 = calculation.desirable_but_not_discoverable_items(df, limit, result_number)    
-    download_file_1 = download_file_1.to_csv()
-    download_file_2 = download_file_2.to_csv()
-    
+        
     st.text('Discoverable but not desirable items')
     st.text(calculation.discoverable_but_not_desirable_items(df, limit, result_number))    
-    st.download_button("Press to Download", download_file_1, "file.csv", "text/csv", key='download-csv')
+    
     st.text('Desirable but not discoverable items')
     st.text(calculation.desirable_but_not_discoverable_items(df, limit, result_number))
-    st.download_button("Press to Download", download_file_2, "file.csv", "text/csv", key='download-csv')
     
 except:
     st.text('NO DATA NO BUSINESS  :))')
