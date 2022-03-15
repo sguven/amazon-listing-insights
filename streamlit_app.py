@@ -13,6 +13,9 @@ class calculation:
         sessions_limit = 10
         impression_limit = 100
         df = pd.read_csv(uploaded_file)
+        df['Sessions'] = df['Sessions'].replace("," , "")
+        df['Total Order Items'] = df['Total Order Items'].replace("," , "")
+        df['Page Views'] = df['Page Views'].replace("," , "")                  
         df['Sessions'] = pd.to_numeric(df['Sessions'], errors='coerce')
         df['Total Order Items'] = pd.to_numeric(df['Total Order Items'], errors='coerce')
         df['Page Views'] = pd.to_numeric(df['Page Views'], errors='coerce')
