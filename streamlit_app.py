@@ -15,16 +15,16 @@ try:
     class calculation:
         def csv_correction(df):
             #df = pd.read_csv(uploaded_file)
-            df['Sessions'] = df['Sessions'].replace("," , "", regex=True)
+            df['Sessions - Total'] = df['Sessions - Total'].replace("," , "", regex=True)
             df['Total Order Items'] = df['Total Order Items'].replace("," , "", regex=True)
-            df['Page Views'] = df['Page Views'].replace("," , "", regex=True)                  
-            df['Sessions'] = pd.to_numeric(df['Sessions'], errors='coerce')
+            df['Page Views- Total'] = df['Page Views- Total'].replace("," , "", regex=True)                  
+            df['Sessions - Total'] = pd.to_numeric(df['Sessions - Total'], errors='coerce')
             df['Total Order Items'] = pd.to_numeric(df['Total Order Items'], errors='coerce')
-            df['Page Views'] = pd.to_numeric(df['Page Views'], errors='coerce')
+            df['Page Views- Total'] = pd.to_numeric(df['Page Views- Total'], errors='coerce')
             return df    
         def csv_calculation(uploaded_file):
             df = calculation.csv_correction(uploaded_file)
-            df['des_not_disc'] = ((df['Total Order Items'] / df['Sessions']) / df['Page Views'])
+            df['des_not_disc'] = ((df['Total Order Items'] / df['Sessions - Total']) / df['Page Views- Total'])
             df.replace([np.inf, -np.inf], np.nan, inplace=True)       
             df = df.dropna()
             return df        
